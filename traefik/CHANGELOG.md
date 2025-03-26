@@ -1,7 +1,7 @@
 # Changelog
 
-## 3.3.4.d1
-* XXXYYY
+## 3.3.4.d2
+* XXXYYYAAA
   
 ## 3.3.4.b
 * Fixed `Unknown Level String` when setting log level to anything other than `info`.
