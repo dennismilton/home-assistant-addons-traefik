@@ -25,8 +25,8 @@ LABEL \
     org.opencontainers.image.description="Home Assistant Unofficial Add-on: ${BUILD_ARCH} Traefik image" \
     org.opencontainers.image.vendor="BoomAM" \
     org.opencontainers.image.authors="BoomAM" \
-    org.opencontainers.image.url="https://alxx.nl/home-assistant-addons/" \
-    org.opencontainers.image.source="https://alxx.nl/home-assistant-addons/" \
+    org.opencontainers.image.url="https://github.com/boomam/home-assistant-addons" \
+    org.opencontainers.image.source="https://github.com/boomam/home-assistant-addons" \
     org.opencontainers.image.documentation="https://github.com/boomam/home-assistant-addons/blob/master/traefik/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
