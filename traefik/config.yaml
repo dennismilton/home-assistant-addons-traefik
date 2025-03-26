@@ -42,7 +42,7 @@ options:
     resolvers: []
   env_vars: []
 schema:
-  log_level: list(trace|debug|info|notice|warning|error|fatal|panic)
+  log_level: list(TRACE|DEBUG|INFO|NOTICE|WARNING|ERROR|FATEL|PANIC)
   access_logs: bool
   forwarded_headers_insecure: bool
   dynamic_configuration_path: str
