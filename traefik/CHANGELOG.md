@@ -3,8 +3,8 @@
 First three digits are Traefik's version number.
 The letter & number are bug fixe releases where said issue is not with Traefik, but with this template.
 
-## 3.3.4.d
-* Adjusted nginx for dashboard sub-filters to fix rendering issue on sidebar.
+## 3.3.4.e
+* Adjusted sidebar streaming to help with rendering of traefik dashboard through sidebar.
 
 ## 3.3.4.c
 * Fixed log level issues with (most) log levels.
