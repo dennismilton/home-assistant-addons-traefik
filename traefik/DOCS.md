@@ -35,7 +35,7 @@ http:
     homeassistant:
       rule: "Host(`home.domain.com`)"
       entryPoints: 
-        - "web-secure"
+        - "websecure"
       tls:
         certResolver: le
       service: homeassistant
