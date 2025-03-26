@@ -12,7 +12,7 @@ Traefik bundled as an Home Assistant add-on.
 
 ## About
 ### This was forked and updated from an inactive github project [here](https://alxx.nl/home-assistant-addons/) -  
-99% of the work on this was done by [alex3305](https://github.com/alex3305), i have simply updated the code to deploy the latest Traefik release.
+99% of the work on this was done by [alex3305](https://github.com/alex3305), i have simply updated the code to deploy the latest Traefik release and added some additional bits here and there.
 
 Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. This add-on provides dynamic Traefik configuration based on files.
 
@@ -22,7 +22,7 @@ Traefik is a modern HTTP reverse proxy and load balancer that makes deploying mi
 
 * Default port 80 can conflict with other ports
 * Log level of 'warning/warn' does not work at this time, other log levels are fine - Default is 'error'.
-* Sidebar for Traefik does not render correctly - accessing via port 8080 is the current workaround.
+* Sidebar for Traefik does not render correctly - accessing via port (http://IP:8080/dashboard) is the current workaround.
 
 ## Final notes
 
