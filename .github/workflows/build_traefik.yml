@@ -12,6 +12,7 @@ on:
   pull_request:
     paths:
       - 'traefik/**'
+  workflow_dispatch:  # Manual trigger only
 
 jobs:
   build:
