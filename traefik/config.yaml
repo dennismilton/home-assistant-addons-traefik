@@ -34,7 +34,7 @@ map:
   - share
   - ssl:rw
 options:
-  log_level: warning
+  log_level: warn
   access_logs: false
   forwarded_headers_insecure: false
   dynamic_configuration_path: "/config/traefik/"
@@ -43,7 +43,7 @@ options:
     resolvers: []
   env_vars: []
 schema:
-  log_level: list(TRACE|DEBUG|INFO|NOTICE|WARNING|ERROR|FATAL|PANIC)
+  log_level: list(TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC)
   access_logs: bool
   forwarded_headers_insecure: bool
   dynamic_configuration_path: str
