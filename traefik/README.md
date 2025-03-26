@@ -14,7 +14,7 @@ Traefik bundled as an Home Assistant add-on.
 
 Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. This add-on provides dynamic Traefik configuration based on files.
 
-[Click here for the full Treafik documentation](https://docs.traefik.io/)
+[Click here for the full Traefik documentation](https://docs.traefik.io/)
 
 ## Known issues and limitations
 
