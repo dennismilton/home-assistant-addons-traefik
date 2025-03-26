@@ -11,6 +11,8 @@ Traefik bundled as an Home Assistant add-on.
 ![Build and test Traefik](https://github.com/boomam/home-assistant-addons/workflows/Build%20and%20test%20Traefik/badge.svg?branch=master)
 
 ## About
+### This was forked and updated from an inactive github project [here](https://alxx.nl/home-assistant-addons/) -  
+99% of the work on this was done by [alex3305](https://github.com/alex3305), i have simply updated the code to deploy the latest Traefik release.
 
 Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. This add-on provides dynamic Traefik configuration based on files.
 
