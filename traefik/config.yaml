@@ -3,8 +3,7 @@ name: Traefik
 version: 3.3.4.d3
 slug: traefik
 description: |
-  Traefik is a modern HTTP reverse proxy and load balancer that makes deploying
-  microservices easy.
+  Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. 
 arch:
   - aarch64
   - amd64
@@ -27,6 +26,7 @@ ports_description:
 ingress: true
 ingress_entry: dashboard/
 ingress_port: 8080
+ingress_stream: true
 hassio_role: default
 hassio_api: true
 panel_icon: mdi:earth-arrow-right
