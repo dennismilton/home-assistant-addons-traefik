@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.3.4 A (bug fix release)
+## 3.3.4.a (bug fix release)
 * Updated docs and guidance that displays in HA.
 * Updated references to old repo.
 * Updated name of entrypoints to match Traefik default standards.
