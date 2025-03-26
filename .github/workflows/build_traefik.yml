@@ -4,14 +4,14 @@ env:
   ADD_ON_DIRECTORY: traefik
 
 on: 
-  push:
-    paths:
-      - 'traefik/**'
-    branches:
-      - master
-  pull_request:
-    paths:
-      - 'traefik/**'
+#  push:
+#    paths:
+#      - 'traefik/**'
+#    branches:
+#      - master
+#  pull_request:
+#    paths:
+#      - 'traefik/**'
   workflow_dispatch:  # Manual trigger only
 
 jobs:
