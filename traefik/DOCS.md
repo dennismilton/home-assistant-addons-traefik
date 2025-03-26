@@ -13,31 +13,32 @@ Follow these steps to get the add-on installed on your system:
 
 ## How to use
 
-In the configuration section you will need to set the required configuration path. This can be a directory within your Home Assistant config or Hass.io share directories, since both are read-only mounted on this add-on.
+In the configuration section you will need to set the required configuration path.  
+On the configuration tab, this is the entry called `dynamic_configuration_path`.  
+If you set it to `/config/traefik`, the actual location on HA will be the root of your configuration directory (where configuration.yaml typically is), within a directory called 'Traefik'.
+_Note, you will need to create that directory, and the initial traefik dynamic file configuration manually._
 
-Any Traefik endpoint configuration you put in there will be automatically picked up by this add-on. Updates will also be automatically processed by Traefik.
+With Traefik, a dynamic configuration refers to the file you would put in this `config.yml`, and dynamically loads it on each save of the file.
 
-You can also enable Let's Encrypt support within the configuration and set additional environment variables when those are needed.
-
-This add-on provides two Traefik entrypoints. `web` on port 80 and `web-secure` on port 443.
-
-### Example dynamic Traefik configuration
-
+As a config to get started, the below can be created and copied as is for basic functionality -  
 ```yaml
 http:
   routers:
-    redirectToHttpsRouter:
-      entryPoints: ["web"]
-      middlewares: ["httpsRedirect"]
+    httpsredirect:
+      entryPoints: 
+        - "web"
+      middlewares: 
+        - "httpsRedirect"
       rule: "HostRegexp(`{host:.+}`)"
-      service: noopService
-
-    homeAssistantRouter:
-      rule: "Host(`hass.io`)"
-      entryPoints: ["web-secure"]
+      service: httpsredirect
+      
+    homeassistant:
+      rule: "Host(`home.domain.com`)"
+      entryPoints: 
+        - "web-secure"
       tls:
         certResolver: le
-      service: homeAssistantService
+      service: homeassistant
 
   middlewares:
     httpsRedirect:
@@ -45,16 +46,20 @@ http:
         scheme: https
 
   services:
-    noopService:
+    httpsredirect:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.10"
-
-    homeAssistantService:
+          - url: "http://homeassistant"
+  
+    homeassistant:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.10:8123"
+          - url: "http://homeassistant:8123"
+        passHostHeader: true
 ```
+
+You can also enable Let's Encrypt support within the configuration and set additional environment variables when those are needed.
+This add-on provides two Traefik entrypoints. `web` on port 80 and `web-secure` on port 443.
 
 ## Configuration
 
@@ -90,6 +95,7 @@ dealing with an unknown issue. Possible values are:
 - `warning`: Exceptional occurrences that are not errors.
 - `error`:  Runtime errors that do not require immediate action.
 - `fatal`: Something went terribly wrong. Add-on becomes unusable.
+- `panic`: Run for the hills
 
 Please note that each level automatically includes log messages from a
 more severe level, e.g., `debug` also shows `info` messages. By default,
