@@ -1,3 +1,4 @@
+# This file defines how things are displayed in HA, options that show, etc.
 name: Traefik
 version: 3.3.4.b
 slug: traefik
@@ -33,7 +34,7 @@ map:
   - share
   - ssl:rw
 options:
-  log_level: info
+  log_level: warning
   access_logs: false
   forwarded_headers_insecure: false
   dynamic_configuration_path: "/config/traefik/"
@@ -42,7 +43,7 @@ options:
     resolvers: []
   env_vars: []
 schema:
-  log_level: list(TRACE|DEBUG|INFO|NOTICE|WARNING|ERROR|FATEL|PANIC)
+  log_level: list(TRACE|DEBUG|INFO|NOTICE|WARNING|ERROR|FATAL|PANIC)
   access_logs: bool
   forwarded_headers_insecure: bool
   dynamic_configuration_path: str
