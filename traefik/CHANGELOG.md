@@ -1,7 +1,6 @@
 # Changelog
 
 ## 3.3.4 A (bug fix release)
-* Fixed log level error on container start.
 * Updated docs and guidance that displays in HA.
 * Updated references to old repo.
 * Updated name of entrypoints to match Traefik default standards.
