@@ -21,7 +21,10 @@ Traefik is a modern HTTP reverse proxy and load balancer that makes deploying mi
 ## Known issues and limitations
 
 * Default port 80 can conflict with other ports
+* Log level of 'warning/warn' does not work at this time, other log levels are fine - Default is 'error'.
+* Sidebar for Traefik does not render correctly - accessing via port 8080 is the current workaround.
 
 ## Final notes
 
-This project is not affiliated with Traefik, the Traefik Maintainer Team or Containous, but simply a community effort. Traefik itself is distributed under the [MIT License](https://github.com/containous/traefik/blob/master/LICENSE.md).
+This project is not affiliated with Traefik, the Traefik Maintainer Team or Containous, but simply a community effort.  
+Traefik itself is distributed under the [MIT License](https://github.com/containous/traefik/blob/master/LICENSE.md).
