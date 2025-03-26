@@ -1,10 +1,10 @@
 # Changelog
 
-## 3.3.4.d3
-* XXXYYYAAABBB
+## 3.3.4.d4
+* XYZABC1234
   
 ## 3.3.4.b
-* Fixed `Unknown Level String` when setting log level to anything other than `info`.
+* Fixed `Unknown Level String` when setting log level.
 * Added 8080/tcp to ports to allow direct access to Traefik Dashboard (http://IP_Address:8080/dashboard/)
 * Added notes and references to original fork/dev.
 
