@@ -1,4 +1,4 @@
-# Changelog
+# Change Log
 ## Versionining Notes
 First three digits are Traefik's version number.
 The letter & number are bug fixe releases where said issue is not with Traefik, but with this template.
