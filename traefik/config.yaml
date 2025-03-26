@@ -23,9 +23,10 @@ ports:
 ports_description:
   80/tcp: HTTP
   443/tcp: HTTPS
-  8080/tcp: traefik
+  8080/tcp: traefik dashboard
 ingress: true
-ingress_entry: dashboard/#/
+ingress_entry: dashboard/
+ingress_port: 8080
 hassio_role: default
 hassio_api: true
 panel_icon: mdi:earth-arrow-right
