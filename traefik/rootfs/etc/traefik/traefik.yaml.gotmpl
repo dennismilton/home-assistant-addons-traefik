@@ -10,7 +10,7 @@ global:
 entryPoints:
   web:
     address: ":80"
-  web-secure:
+  websecure:
     address: ":443"
 {{- if has $options "forwarded_headers_insecure" }}
     forwardedHeaders:
