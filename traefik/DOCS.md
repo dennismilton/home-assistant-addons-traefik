@@ -2,6 +2,9 @@
 
 Traefik bundled as an Home Assistant add-on.
 
+### This was forked and updated from an inactive github project [here](https://alxx.nl/home-assistant-addons/) -  
+99% of the work on this was done by [alex3305](https://github.com/alex3305), i have simply updated the code to deploy the latest Traefik release.
+
 ## Installation
 
 Follow these steps to get the add-on installed on your system:
