@@ -2,6 +2,8 @@
 ## Versioning Notes
 First three digits are Traefik's version number.
 The letter & number are bug fixe releases where said issue is not with Traefik, but with this template.
+## 3.3.4.f
+* sidebar fix testing.
 
 ## 3.3.4.e
 * Adjusted sidebar streaming to help with rendering of traefik dashboard through sidebar.
