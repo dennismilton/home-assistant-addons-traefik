@@ -25,7 +25,7 @@ ports_description:
   8080/tcp: traefik dashboard
 ingress: true
 ingress_entry: dashboard/
-ingress_port: 443
+#ingress_port: 443
 #ingress_stream: true
 hassio_role: default
 hassio_api: true
