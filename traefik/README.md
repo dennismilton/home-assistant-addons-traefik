@@ -22,7 +22,7 @@ Traefik is a modern HTTP reverse proxy and load balancer that makes deploying mi
 
 * Default port 80 can conflict with other ports
 * Log level of 'warning/warn' does not work at this time, other log levels are fine - Default is 'error'.
-* Sidebar for Traefik does not render correctly - accessing via port (http://IP:8080/dashboard) is the current workaround.
+~~* Sidebar for Traefik does not render correctly - accessing via port (http://IP:8080/dashboard) is the current workaround.~~
 
 ## Final notes
 
