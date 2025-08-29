@@ -26,6 +26,11 @@ api:
   dashboard: true
   insecure: true
 
+{{- if has $options "insecure_skip_verify" }}
+serversTransport:
+  insecureSkipVerify: {{ $options.insecure_skip_verify }}
+{{- end }}
+
 {{ if and (has $options "letsencrypt") ($options.letsencrypt.enabled) -}}
 certificatesResolvers:
   le:
