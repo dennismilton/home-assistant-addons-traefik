@@ -38,6 +38,7 @@ options:
   log_level: ERROR
   access_logs: false
   forwarded_headers_insecure: false
+  insecure_skip_verify: false
   dynamic_configuration_path: "/config/traefik/"
   letsencrypt:
     enabled: false
@@ -52,6 +53,7 @@ schema:
   log_level: list(TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC)
   access_logs: bool
   forwarded_headers_insecure: bool
+  insecure_skip_verify: bool
   dynamic_configuration_path: str
   letsencrypt:
     enabled: bool

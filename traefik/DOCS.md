@@ -98,10 +98,17 @@ When this option is enabled, the forwarded headers (`X-Forwarded-*`) will not be
 
 > ___Note__ for Cloudflare `X-Forwarded-*` proxied headers to work, this must be enabled._
 
-### Option `dynamic_configuration_path` (required)
+### Option `forwarded_headers_insecure` (required)
 
-Path to the directory with the dynamic endpoint configuration.  
-See the example above. 
+Enables insecure forwarding headers.  
+When this option is enabled, the forwarded headers (`X-Forwarded-*`) will not be replaced by Traefik headers. Only enable this option when you trust your forwarding proxy.  
+
+> ___Note__ for Cloudflare `X-Forwarded-*` proxied headers to work, this must be enabled._
+
+### Option `insecure_skip_verify` (required)
+
+Disables SSL certificate verification
+Useful for self-signed certificates used by services
 
 ### Option `letsencrypt` (required)
 
