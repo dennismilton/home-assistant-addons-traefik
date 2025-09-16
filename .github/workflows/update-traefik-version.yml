@@ -1,0 +1,49 @@
+name: Update Traefik Version
+
+on:
+  schedule:
+    - cron: "0 0 */3 * *"   # run every 3 days.
+  workflow_dispatch:      # allow manual runs
+
+jobs:
+  update-traefik:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Get latest Traefik release
+        id: traefik
+        run: |
+          latest=$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq -r .tag_name)
+          latest=${latest#v}
+          echo "Latest Traefik release: $latest"
+          echo "latest=$latest" >> $GITHUB_OUTPUT
+
+      - name: Show current build.yaml
+        run: cat traefik/build.yaml
+
+      - name: Update build.yaml
+        run: |
+          sed -i "s/^  TRAEFIK_VERSION:.*/  TRAEFIK_VERSION: ${{ steps.traefik.outputs.latest }}/" traefik/build.yaml
+
+      - name: Show updated build.yaml
+        run: cat traefik/build.yaml
+
+      - name: Update CHANGELOG.md
+        run: |
+          version=${{ steps.traefik.outputs.latest }}
+          sed -i "5a ## Traefik $version\n\n- Updated to version $version\n" traefik/CHANGELOG.md
+
+#      - name: Commit changes
+#        run: |
+#          git config user.name "github-actions[bot]"
+#          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#          git add traefik/build.yaml traefik/CHANGELOG.md
+#          if ! git diff --cached --quiet; then
+#            git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
+#            git push
+#          else
+#            echo "No changes to commit"
+#          fi
