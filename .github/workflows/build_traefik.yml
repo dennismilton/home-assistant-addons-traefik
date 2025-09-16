@@ -4,15 +4,12 @@ env:
   ADD_ON_DIRECTORY: traefik
 
 on: 
-#  push:
-#    paths:
-#      - 'traefik/**'
-#    branches:
-#      - master
-#  pull_request:
-#    paths:
-#      - 'traefik/**'
-  workflow_dispatch:  # Manual trigger only
+  push:
+    paths:
+      - 'traefik/build.yaml'   # trigger only if this file changes
+    branches:
+      - master                 
+  workflow_dispatch:
 
 jobs:
   build:
