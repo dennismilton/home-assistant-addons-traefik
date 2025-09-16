@@ -39,8 +39,8 @@ jobs:
           echo "Old version: $old_version"
           echo "New version: $new_version"
 
-          # insert changelog entry below line 5
-          sed -i "5a ## Traefik $new_version\n* Updated Traefik from $old_version to $new_version\n" traefik/CHANGELOG.md
+          # insert changelog entry below line 11
+          sed -i "11a ## Traefik $new_version\n* Updated Traefik from $old_version to $new_version\n" traefik/CHANGELOG.md
 
       - name: Show updated CHANGELOG.md
         run: cat traefik/CHANGELOG.md
