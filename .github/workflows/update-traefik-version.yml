@@ -33,8 +33,14 @@ jobs:
 
       - name: Update CHANGELOG.md
         run: |
-          version=${{ steps.traefik.outputs.latest }}
-          sed -i "5a ## Traefik $version\n\n- Updated to version $version\n" traefik/CHANGELOG.md
+          new_version=${{ steps.traefik.outputs.latest }}
+          # extract old version from build.yaml (last part of the line)
+          old_version=$(grep "TRAEFIK_VERSION:" traefik/build.yaml | awk '{print $2}')
+          echo "Old version: $old_version"
+          echo "New version: $new_version"
+
+          # insert changelog entry below line 5
+          sed -i "5a ## Traefik $new_version\n* Updated Traefik from $old_version to $new_version\n" traefik/CHANGELOG.md
 
       - name: Show updated CHANGELOG.md
         run: cat traefik/CHANGELOG.md
