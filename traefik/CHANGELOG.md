@@ -1,7 +1,7 @@
 # Change Log
 ## Versioning Notes
 First three digits are Traefik's version number.  
-The letter & number are bug fixe releases where said issue is not with Traefik, but with this template.  
+The letter & number are bug fix releases where said issue is not with Traefik, but with this template.  
 
 ## 3.5.2
 ### 3.5.2.a
