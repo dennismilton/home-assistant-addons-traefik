@@ -36,6 +36,9 @@ jobs:
           version=${{ steps.traefik.outputs.latest }}
           sed -i "5a ## Traefik $version\n\n- Updated to version $version\n" traefik/CHANGELOG.md
 
+      - name: Show updated CHANGELOG.md
+        run: cat traefik/CHANGELOG.md
+
 #      - name: Commit changes
 #        run: |
 #          git config user.name "github-actions[bot]"
