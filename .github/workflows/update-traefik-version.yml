@@ -45,14 +45,14 @@ jobs:
       - name: Show updated CHANGELOG.md
         run: cat traefik/CHANGELOG.md
 
-#      - name: Commit changes
-#        run: |
-#          git config user.name "github-actions[bot]"
-#          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-#          git add traefik/build.yaml traefik/CHANGELOG.md
-#          if ! git diff --cached --quiet; then
-#            git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
-#            git push
-#          else
-#            echo "No changes to commit"
-#          fi
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add traefik/build.yaml traefik/CHANGELOG.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
+            git push
+          else
+            echo "No changes to commit"
+          fi
