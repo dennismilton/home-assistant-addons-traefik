@@ -6,4 +6,6 @@
 4. Click on the "INSTALL" button
 
 ## Add-ons
-* [Traefik](traefik/README.md)
+| Name | Readme | Statuses |
+| ----- | ----- | ----- |
+| Traefik | [Traefik](traefik/README.md) | [![Update Traefik Version](https://github.com/boomam/home-assistant-addons/actions/workflows/update-traefik-version.yml/badge.svg)](https://github.com/boomam/home-assistant-addons/actions/workflows/update-traefik-version.yml)  [![Build and test Traefik](https://github.com/boomam/home-assistant-addons/actions/workflows/build_traefik.yml/badge.svg)](https://github.com/boomam/home-assistant-addons/actions/workflows/build_traefik.yml)|
