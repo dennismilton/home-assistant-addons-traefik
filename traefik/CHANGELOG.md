@@ -7,10 +7,7 @@ Base Image will be a manual process for the time being.
 First three digits are Traefik's version number.  
 The letter & number are bug fix releases where said issue is not with Traefik, but with this template.  
 
------  
-
-## Traefik 3.5.3
-* Updated Traefik from 3.5.3 to 3.5.3
+-----
 
 ## Traefik 3.5.2
 * Updated Traefik from 3.5.2 to 3.5.2
