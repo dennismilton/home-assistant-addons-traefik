@@ -10,16 +10,8 @@ The letter & number are bug fix releases where said issue is not with Traefik, b
 -----
 
 ## Traefik 3.5.3
-* Updated Traefik from 3.5.3 to 3.5.3
-
-## Traefik 3.5.2
-* Updated Traefik from 3.5.2 to 3.5.2
-
-## Traefik 3.5.2
-* Updated Traefik from 3.5.2 to 3.5.2
-
-## Traefik 3.5.2
-* Updated Traefik from 3.5.2 to 3.5.2
+* Updated Traefik from 3.5.2 to 3.5.3
+* Updated base image from v18.1.0 to 18.1.3
 
 ## 3.5.2
 ### 3.5.2.a
