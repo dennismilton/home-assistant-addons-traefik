@@ -45,6 +45,13 @@ jobs:
       - name: Show updated CHANGELOG.md
         run: cat traefik/CHANGELOG.md
 
+      - name: Update config.yml
+        run: |
+          new_version=${{ steps.traefik.outputs.latest }}
+          # Use sed to replace the content of line 3 in traefik/config.yml
+          # assuming line 3 looks like 'version: old_version'
+          sed -i '3c\version: '${new_version}'' traefik/config.yml
+
 #      - name: Commit changes
 #        run: |
 #          git config user.name "github-actions[bot]"
