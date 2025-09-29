@@ -50,7 +50,7 @@ jobs:
           new_version=${{ steps.traefik.outputs.latest }}
           # Use sed to replace the content of line 3 in traefik/config.yaml
           # assuming line 3 looks like 'version: old_version'
-          sed -i '3c\version: '${new_version}'' traefik/config.yml
+          sed -i '3c\version: '${new_version}'' traefik/config.yaml
 
 #      - name: Commit changes
 #        run: |
