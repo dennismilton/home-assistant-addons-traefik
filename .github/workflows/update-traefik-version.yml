@@ -45,12 +45,16 @@ jobs:
       - name: Show updated CHANGELOG.md
         run: cat traefik/CHANGELOG.md
 
-      - name: Update config.yml
+      - name: Update config.yaml
         run: |
           new_version=${{ steps.traefik.outputs.latest }}
-          # Use sed to replace the content of line 3 in traefik/config.yaml
-          # assuming line 3 looks like 'version: old_version'
-          sed -i '3c\version: '${new_version}'' traefik/config.yaml
+          echo "Updating traefik/config.yaml line 3 to: version: $new_version"
+          # Use sed with double quotes and direct shell variable expansion for reliability.
+          # The '3c' command CHANGES the entire third line.
+          sed -i "3c\version: $new_version" traefik/config.yaml
+
+      - name: Show updated config.yaml
+        run: cat traefik/config.yaml
 
 #      - name: Commit changes
 #        run: |
