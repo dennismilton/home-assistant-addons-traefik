@@ -19,6 +19,9 @@ Traefik is a modern HTTP reverse proxy and load balancer that makes deploying mi
 
 [Click here for the full Traefik documentation](https://docs.traefik.io/)  
 
+## Configuration
+During configuration, make sure you are adding `CF_DNS_API_TOKEN` and your Cloudflare API Token as an `env_var`, if you are using Cloudflare for your ACME cert verifications.  
+
 ## Known issues and limitations
 
 * Default port 80 can conflict with other ports  
