@@ -2,8 +2,8 @@ name: Update Traefik Version
 
 on:
   schedule:
-    - cron: "0 4 * * 3"   # run every Wednesday days.
-  workflow_dispatch:      # allow manual runs
+    - cron: "0 4 * * 3"   # run every Wednesday
+  workflow_dispatch:
 
 jobs:
   update-traefik:
@@ -18,63 +18,51 @@ jobs:
         run: |
           latest=$(curl -s https://api.github.com/repos/traefik/traefik/releases/latest | jq -r .tag_name)
           latest=${latest#v}
-          echo "Latest Traefik release: $latest"
           echo "latest=$latest" >> $GITHUB_OUTPUT
 
-      - name: Show current build.yaml
-        run: cat traefik/build.yaml
+      - name: Get current version
+        id: current
+        run: |
+          current=$(grep "TRAEFIK_VERSION:" traefik/build.yaml | awk '{print $2}')
+          echo "current=$current" >> $GITHUB_OUTPUT
+
+      - name: Check if update is needed
+        id: check
+        run: |
+          if [ "${{ steps.traefik.outputs.latest }}" = "${{ steps.current.outputs.current }}" ]; then
+            echo "update=false" >> $GITHUB_OUTPUT
+          else
+            echo "update=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: Update build.yaml
+        if: steps.check.outputs.update == 'true'
         run: |
           sed -i "s/^  TRAEFIK_VERSION:.*/  TRAEFIK_VERSION: ${{ steps.traefik.outputs.latest }}/" traefik/build.yaml
 
-      - name: Show updated build.yaml
-        run: cat traefik/build.yaml
-
       - name: Update CHANGELOG.md
+        if: steps.check.outputs.update == 'true'
         run: |
+          old_version=${{ steps.current.outputs.current }}
           new_version=${{ steps.traefik.outputs.latest }}
-          # extract old version from build.yaml (last part of the line)
-          old_version=$(grep "TRAEFIK_VERSION:" traefik/build.yaml | awk '{print $2}')
-          echo "Old version: $old_version"
-          echo "New version: $new_version"
-
-          # insert changelog entry below line 11
+          echo "Updating changelog from $old_version to $new_version"
           sed -i "11a ## Traefik $new_version\n* Updated Traefik from $old_version to $new_version\n" traefik/CHANGELOG.md
 
-      - name: Show updated CHANGELOG.md
-        run: cat traefik/CHANGELOG.md
-
       - name: Update config.yaml
+        if: steps.check.outputs.update == 'true'
         run: |
           new_version=${{ steps.traefik.outputs.latest }}
-          echo "Updating traefik/config.yaml line 3 to: version: $new_version"
-          # Use sed with double quotes and direct shell variable expansion for reliability.
-          # The '3c' command CHANGES the entire third line.
           sed -i "3c\version: $new_version" traefik/config.yaml
 
-      - name: Show updated config.yaml
-        run: cat traefik/config.yaml
-
       - name: Commit changes
+        if: steps.check.outputs.update == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add traefik/build.yaml traefik/CHANGELOG.md
-          if ! git diff --cached --quiet; then
-            git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
-            git push
-          else
-           echo "No changes to commit"
-          fi
-#      - name: Commit changes and Trigger Next Action
-#        run: |
-#          git config user.name "ha-addons-bot" 
-#          git config user.email "ha-addons@boomam.com"
-#          git add traefik/build.yaml traefik/CHANGELOG.md
-#          if ! git diff --cached --quiet; then
-#            git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
-#            git push "https://${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git"
-#          else
-#            echo "No changes to commit"
-#          fi
+          git add traefik/build.yaml traefik/CHANGELOG.md traefik/config.yaml
+          git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
+          git push
+
+      - name: No update needed
+        if: steps.check.outputs.update == 'false'
+        run: echo "✅ Traefik is already up to date (version ${{ steps.current.outputs.current }})"
