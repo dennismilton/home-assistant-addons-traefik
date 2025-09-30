@@ -2,7 +2,7 @@ name: Update Traefik Version
 
 on:
   schedule:
-    - cron: "0 0 */3 * *"   # run every 3 days.
+    - cron: "0 4 * * 3"   # run every Wednesday days.
   workflow_dispatch:      # allow manual runs
 
 jobs:
@@ -56,25 +56,25 @@ jobs:
       - name: Show updated config.yaml
         run: cat traefik/config.yaml
 
-#      - name: Commit changes
-#        run: |
-#          git config user.name "github-actions[bot]"
-#          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-#          git add traefik/build.yaml traefik/CHANGELOG.md
-#          if ! git diff --cached --quiet; then
-#            git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
-#            git push
-#          else
-#           echo "No changes to commit"
-#          fi
-      - name: Commit changes and Trigger Next Action
+      - name: Commit changes
         run: |
-          git config user.name "ha-addons-bot" 
-          git config user.email "ha-addons@boomam.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add traefik/build.yaml traefik/CHANGELOG.md
           if ! git diff --cached --quiet; then
             git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
-            git push "https://${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git"
+            git push
           else
-            echo "No changes to commit"
+           echo "No changes to commit"
           fi
+#      - name: Commit changes and Trigger Next Action
+#        run: |
+#          git config user.name "ha-addons-bot" 
+#          git config user.email "ha-addons@boomam.com"
+#          git add traefik/build.yaml traefik/CHANGELOG.md
+#          if ! git diff --cached --quiet; then
+#            git commit -m "Update Traefik to ${{ steps.traefik.outputs.latest }}"
+#            git push "https://${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git"
+#          else
+#            echo "No changes to commit"
+#          fi
