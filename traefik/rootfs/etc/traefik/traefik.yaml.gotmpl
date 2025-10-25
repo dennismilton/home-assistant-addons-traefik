@@ -60,7 +60,7 @@ certificatesResolvers:
 providers:
   file:
     directory: "{{ $options.dynamic_configuration_path }}"
-{{ if and (has $options "enable_consul_catalog") $options.enable_consul_catalog -}}
+{{- if and (has $options "enable_consul_catalog") $options.enable_consul_catalog }}
   consulCatalog:
     endpoint:
       address: "{{ $options.consul_endpoint }}"
