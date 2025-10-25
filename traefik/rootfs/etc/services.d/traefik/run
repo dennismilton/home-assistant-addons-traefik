@@ -8,10 +8,30 @@ else
     bashio::log.info "Extracted variables ${ENV_VARS}"
 fi
 
+# Build additional CLI arguments for Consul Catalog and custom flags
+EXTRA_ARGS=""
+
+# Check if Consul Catalog is enabled
+CONSUL_ENABLED=$(gomplate -d options=/data/options.json -i '{{ (ds "options").enable_consul_catalog }}')
+if [ "$CONSUL_ENABLED" = "true" ]; then
+    CONSUL_ENDPOINT=$(gomplate -d options=/data/options.json -i '{{ (ds "options").consul_endpoint }}')
+    bashio::log.info "Enabling Consul Catalog provider at ${CONSUL_ENDPOINT}"
+    EXTRA_ARGS="${EXTRA_ARGS} --providers.consulcatalog=true"
+    EXTRA_ARGS="${EXTRA_ARGS} --providers.consulcatalog.endpoint.address=${CONSUL_ENDPOINT}"
+    EXTRA_ARGS="${EXTRA_ARGS} --providers.consulcatalog.exposedByDefault=false"
+fi
+
+# Add any additional arguments from config
+ADDITIONAL_ARGS=$(gomplate -d options=/data/options.json -i '{{ range (ds "options").additional_arguments }}{{ . }} {{ end }}')
+if [ -n "$ADDITIONAL_ARGS" ]; then
+    bashio::log.info "Adding additional arguments: ${ADDITIONAL_ARGS}"
+    EXTRA_ARGS="${EXTRA_ARGS} ${ADDITIONAL_ARGS}"
+fi
+
 bashio::log.info "Starting Traefik..."
 if [ -z "$ENV_VARS" ]; then
     bashio::log.info "Running Traefik without env_vars"
-    exec /usr/local/bin/traefik
+    exec /usr/local/bin/traefik ${EXTRA_ARGS}
 else
-    env $ENV_VARS /usr/local/bin/traefik
+    env ${ENV_VARS} /usr/local/bin/traefik ${EXTRA_ARGS}
 fi

@@ -14,6 +14,60 @@ Follow these steps to get the add-on installed on your system:
 3. Find the "Traefik" add-on and click it.
 4. Click on the "INSTALL" button
 
+## New (optional) features
+
+### Consul Catalog (service discovery)
+This add-on now supports enabling Traefik's **Consul Catalog** provider via static flags.
+
+Add to your add-on configuration:
+```yaml
+enable_consul_catalog: true
+consul_endpoint: "<consul_host>:8500"
+```
+Traefik will start with Consul Catalog enabled and will discover services from Consul. Services must be tagged appropriately (e.g., via registrator) and Traefik will only publish ones with `traefik.enable=true` (default `exposedByDefault=false`).
+
+### Additional static CLI arguments
+If you need to pass extra static flags, use:
+```yaml
+additional_arguments:
+  - "--api.dashboard=true"
+  # any other static flags you require
+```
+
+> Note: Continue to use `env_vars` for provider credentials (e.g., `CLOUDFLARE_DNS_API_TOKEN=...` for DNS-01).
+
+### Let's Encrypt note
+When LE is enabled in the add-on config, a resolver named **`le`** is created. Reference it in dynamic routes as:
+`tls.certResolver: le`
+
+### Complete example add-on configuration
+```yaml
+log_level: error
+access_logs: false
+forwarded_headers_insecure: false
+insecure_skip_verify: false
+
+dynamic_configuration_path: /config/traefik/
+
+letsencrypt:
+  enabled: true
+  resolvers:
+    - 1.1.1.1:53
+  email: admin@example.com
+  challenge_type: dnsChallenge
+  provider: cloudflare
+  delayBeforeCheck: 10
+
+env_vars:
+  - "CLOUDFLARE_DNS_API_TOKEN=<CF token with Zone:Read + DNS:Edit>"
+
+enable_consul_catalog: true
+consul_endpoint: "<consul_host>:8500"
+
+additional_arguments:
+  - "--api.dashboard=true"
+```
+
 ## How to use
 
 In the configuration section you will need to set the required configuration path.  
@@ -38,7 +92,7 @@ http:
       
     homeassistant:
       rule: "Host(`home.domain.com`)"
-      entryPoints: 
+      entryPoints:
         - "websecure"
       tls:
         certResolver: le
@@ -112,8 +166,8 @@ Useful for self-signed certificates used by services
 
 ### Option `letsencrypt` (required)
 
-Whether or not to enable Let's Encrypt.  
-When there is data within this section, the `le` certResolver will be activated.  
+Whether or not to enable Let's Encrypt.
+When there is data within this section, the `le` certResolver will be activated.
 You will also have to set the Let's Encrypt e-mail and challange type. Otherwise Traefik will fail to start.
 
 #### LetsEncrypt Options

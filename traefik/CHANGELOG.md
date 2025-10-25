@@ -10,6 +10,11 @@ The letter & number are bug fix releases where said issue is not with Traefik, b
 -----
 
 ## Traefik 3.5.3
+### 3.5.3.a
+* Added optional Consul Catalog provider support (`enable_consul_catalog`, `consul_endpoint` options)
+* Added `additional_arguments` option for passing extra static CLI flags to Traefik
+* Enhanced run script to support dynamic provider configuration via CLI arguments
+
 * Updated Traefik from 3.5.2 to 3.5.3
 * Updated base image from v18.1.0 to 18.1.3
 

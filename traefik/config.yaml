@@ -49,6 +49,10 @@ options:
     provider: cloudflare
     delayBeforeCheck: 10
   env_vars: []
+  # New options for Consul Catalog & extra static flags
+  enable_consul_catalog: false
+  consul_endpoint: ""
+  additional_arguments: []
 schema:
   log_level: list(TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC)
   access_logs: bool
@@ -57,11 +61,15 @@ schema:
   dynamic_configuration_path: str
   letsencrypt:
     enabled: bool
-    email: email?
-    challenge_type: match(tlsChallenge|httpChallenge|dnsChallenge)?
-    provider: str?
-    delayBeforeCheck: int?
     resolvers:
-      - str?
+      - str
+    email: str
+    challenge_type: list(tlsChallenge|httpChallenge|dnsChallenge)
+    provider: str
+    delayBeforeCheck: int
   env_vars:
+    - str
+  enable_consul_catalog: bool
+  consul_endpoint: str
+  additional_arguments:
     - str
